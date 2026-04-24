@@ -1,6 +1,6 @@
 
 let clienteWeb = null;
-const clientId = "Esp32MFOF_"
+const clientId = "Esp32MFOF_00"
 clienteWeb = new Paho.MQTT.Client(
     "broker.hivemq.com",
     8884,
