@@ -1,67 +1,315 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #000;
-    color: white;
-    margin: 0;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+/* ================= VARIÁVEIS DO DESIGN SYSTEM ================= */
+:root {
+    /* Paleta Modo Escuro (Padrão) */
+    --bg-color: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.65);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --primary: #e11d48; /* Vermelho SENAI Premium */
+    --primary-hover: #be123c;
+    --btn-text: #ffffff;
+    --glow-color: rgba(225, 29, 72, 0.4);
+    
+    --font-main: 'Inter', system-ui, sans-serif;
+    --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.5);
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-/* HEADER */
-.header {
-    background-color: #c00000;
-    padding: 15px;
+/* Paleta Modo Claro */
+body.light-mode {
+    --bg-color: #f1f5f9;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(0, 0, 0, 0.05);
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --primary: #e11d48;
+    --primary-hover: #be123c;
+    --glow-color: rgba(225, 29, 72, 0.2);
+    --shadow-soft: 0 20px 40px -15px rgba(0,0,0,0.1);
+    --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+/* ================= RESET E BASE ================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    /* Efeito de fundo moderno com gradientes radiais sobrepostos */
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(225, 29, 72, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.05), transparent 25%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ================= HEADER ================= */
+.header {
+    text-align: center;
+    padding: 3rem 1rem 1.5rem;
+    width: 100%;
+    animation: fadeInDown 0.8s ease-out;
 }
 
 .logo {
-    width: 120px;
-    margin-bottom: 10px;
+    width: 160px;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
 }
 
-/* Container */
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
+body.light-mode .logo {
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
 }
 
-/* Cards */
-.card {
-    background: #111;
-    border: 2px solid #c00000;
-    padding: 20px;
-    border-radius: 12px;
-    width: 200px;
-    box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--text-main) 0%, var(--text-muted) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-/* Lâmpada */
-.lampada {
-    font-size: 60px;
-    margin: 10px 0;
-}
-
-/* Quando ligada */
-.acesa {
-    color: #ff0000;
-}
-
-/* Botões */
-button {
-    margin: 5px;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 6px;
-    background: #c00000;
-    color: white;
+/* Botão Tema */
+.btn-tema {
+    padding: 10px 24px;
+    border-radius: 50px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.9rem;
     cursor: pointer;
-    font-weight: bold;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-card);
 }
 
-button:hover {
-    background: #ff1a1a;
+.btn-tema:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px var(--glow-color);
+    border-color: var(--primary);
+}
+
+/* ================= CONTAINERS & CARDS ================= */
+.controle-geral, .container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+    padding: 1rem 2rem 3rem;
+}
+
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 2rem;
+    text-align: center;
+    flex: 1;
+    min-width: 260px;
+    max-width: 350px;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: fadeInUp 0.8s ease-out both;
+}
+
+/* Atraso cascata na animação dos cards */
+.container .card:nth-child(1) { animation-delay: 0.1s; }
+.container .card:nth-child(2) { animation-delay: 0.2s; }
+.container .card:nth-child(3) { animation-delay: 0.3s; }
+.container .card:nth-child(4) { animation-delay: 0.4s; }
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+body.light-mode .card:hover {
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ================= LÂMPADAS (VISUAL) ================= */
+.lampada {
+    font-size: 5rem;
+    margin: 1.5rem 0;
+    filter: grayscale(1) opacity(0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-block;
+}
+
+.acesa {
+    filter: grayscale(0) opacity(1) drop-shadow(0 0 30px rgba(255, 215, 0, 0.8));
+    transform: scale(1.15);
+}
+
+/* ================= BOTÕES ================= */
+button {
+    font-family: var(--font-main);
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0.3rem;
+    transition: all 0.2s ease;
+    letter-spacing: 0.02em;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.botoes-card button {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    border: 1px solid var(--card-border);
+    width: calc(50% - 12px);
+}
+
+body.light-mode .botoes-card button {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.botoes-card button:hover:not(:disabled) {
+    background: var(--text-main);
+    color: var(--bg-color);
+}
+
+.btn-primario {
+    background: var(--primary);
+    color: var(--btn-text);
+    box-shadow: 0 4px 15px var(--glow-color);
+}
+
+.btn-primario:hover:not(:disabled) {
+    background: var(--primary-hover);
+    box-shadow: 0 6px 20px var(--glow-color);
+}
+
+.btn-perigo {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--text-muted);
+}
+
+.btn-perigo:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--text-main);
+}
+
+body.light-mode .btn-perigo:hover:not(:disabled) {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Botão do Modo Ladrão */
+.btn-alerta {
+    background: #ef4444;
+    color: white;
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    animation: pulseAlert 2s infinite;
+}
+
+.btn-alerta:hover:not(:disabled) {
+    background: #dc2626;
+    animation: none;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(239, 68, 68, 0.5);
+}
+
+/* ================= NOTIFICAÇÕES (TOAST) ================= */
+#toast {
+    position: fixed;
+    bottom: 30px; /* Mudado para baixo, estilo app nativo */
+    right: 30px;
+    padding: 16px 32px;
+    border-radius: 16px;
+    color: white;
+    font-weight: 600;
+    transform: translateY(150%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+}
+
+.toast-visible {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+}
+
+.success {
+    background: rgba(16, 185, 129, 0.9);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.error {
+    background: rgba(225, 29, 72, 0.9);
+    border: 1px solid rgba(225, 29, 72, 0.2);
+}
+
+/* ================= KEYFRAMES (ANIMAÇÕES) ================= */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseAlert {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* ================= RESPONSIVIDADE ================= */
+@media (max-width: 768px) {
+    h1 { font-size: 1.5rem; }
+    .controle-geral, .container { padding: 1rem; gap: 1rem; }
+    .card { min-width: 100%; padding: 1.5rem; }
+    .botoes-card button { width: 100%; margin: 5px 0; }
+    #toast { bottom: 20px; right: 20px; left: 20px; text-align: center; }
 }
