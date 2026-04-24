@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IOT</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <div class="header">
+        <img src="senai-logo.png" alt="Logo SENAI" class="logo">
+        <h1>Gerenciamento de Lâmpadas IOT</h1>
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+            <h2>Lâmpada Sala</h2>
+            <div id="lp-sala" class="lampada">💡</div>
+            <button onclick="ligarLampadaSala()">Ligar</button>
+            <button onclick="desligarLampadaSala()">Desligar</button>
+        </div>
+
+        <div class="card">
+            <h2>Lâmpada Cozinha</h2>
+            <div id="lp-cozinha" class="lampada">💡</div>
+            <button onclick="ligarLampadaCozinha()">Ligar</button>
+            <button onclick="desligarLampadaCozinha()">Desligar</button>
+        </div>
+
+        <div class="card">
+            <h2>Lâmpada Quarto 1</h2>
+            <div id="lp-quarto1" class="lampada">💡</div>
+            <button onclick="ligarLampadaQuarto1()">Ligar</button>
+            <button onclick="desligarLampadaQuarto1()">Desligar</button>
+        </div>
+
+        <div class="card">
+            <h2>Lâmpada Quarto 2</h2>
+            <div id="lp-quarto2" class="lampada">💡</div>
+            <button onclick="ligarLampadaQuarto2()">Ligar</button>
+            <button onclick="desligarLampadaQuarto2()">Desligar</button>
+        </div>
+
+        <div class="card">
+            <h2>TODAS LAMPADAS</h2>
+            <div id="lp-todas" class="lampada">💡</div>
+            <button onclick="ligarTodasLampadas()">Ligar</button>
+            <button onclick="desligarTodasLampadas()">Desligar</button>
+        </div>
+
+    </div>
+
+</body>
+
+<script src="mqttws31.js"></script>
+<script src="index.js"></script>
+</html>
