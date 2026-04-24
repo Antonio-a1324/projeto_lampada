@@ -158,3 +158,21 @@ function notificar(texto, tipo) {
     // Esconde a notificação após 3 segundos
     setTimeout(() => toast.className = "", 3000);
 }
+
+// ================= VIBRAÇÃO GLOBAL =================
+
+// Espera que a página carregue completamente
+document.addEventListener("DOMContentLoaded", () => {
+    // Seleciona todos os botões na página
+    const botoes = document.querySelectorAll("button");
+    
+    botoes.forEach(btn => {
+        btn.addEventListener("click", () => {
+            // Verifica se o dispositivo e o navegador suportam vibração
+            if (navigator.vibrate) {
+                // Vibração curta e subtil de 50 milissegundos
+                navigator.vibrate(50); 
+            }
+        });
+    });
+});
