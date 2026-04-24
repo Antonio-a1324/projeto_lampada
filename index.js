@@ -8,6 +8,7 @@ clienteWeb = new Paho.MQTT.Client(
 );
 
 clienteWeb.connect({
+    useSSL: true,
     onSuccess: function () {
         alert("Conectado ao broker MQTT");
     },
